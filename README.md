@@ -57,4 +57,58 @@ int main()
 ```
 ------------
 # Function Introduction｜功能介绍
-今天太晚了，懒得写，明天继续写qaq
+**1. C-style file stream｜C式文件流**  
+
+This can easily redirect the input and output streams to file streams, allowing you to directly use `std::cin` and `std::cout`|这可以一键重载输入输出流到文件流，你可以直接使用 `std::cin` 与 `std::cout`  
+
+format: `cfs::cfs(input_filename, output_filename)` ｜格式：`cfs::cfs(输入文件名,输出文件名)`  
+
+And its paired close function, `cfs::closecfs()`, can redirect the input and output streams back to the console.|以及与其搭配的关闭函数 `cfs::closecfs()` 可以重新将输入输出流定向回控制台  
+ 
+For example|例如  
+```cpp
+#include <bits/stdc++.h> //just for g++
+#include "cfs.h"
+
+int main()
+{
+    cfs::cfs("test.in","test.out");
+    int n;
+    std::cin >> n;
+    std::cout << n << std::endl;
+    cfs::closecfs();
+    return 0;
+}
+```
+The above code will read the first number from the file `test.in` and output it to `test.out`｜以上代码将会读入文件 `test.in` 中的首个数字并输出在 `test.out` 中  
+
+**2. C++-style file stream｜C++式文件流**  
+
+This defines dedicated file stream functions `cfs::cin` and `cfs::cout`. You can use `cfs::cin` and `cfs::cout` for file stream input/output while retaining `std::cin` and `std::cout` for standard input/output.|这定义了专门的文件流函数 `cfs::cin` 与 `cfs::cout` 你可以使用 `cfs::cin` 与 `cfs::cout` 实现文件流输入输出，并保留 `std::cin` 与 `std::cout` 进行标准输入输出  
+
+format: `cfs::cppfs(input_filename, output_filename)` ｜格式：`cfs::cppfs(输入文件名,输出文件名)`  
+
+And its paired close function, `cfs::closecppfs()`, can close `cfs::cin` and `cfs::cout`. After closing, you will not be able to use the related operations until you reopen the file stream; otherwise, unknown errors may occur.|以及与其搭配的关闭函数 `cfs::closecppfs()` 可以关闭 `cfs::cin` 与 `cfs::cout` 关闭后，你将无法使用相关操作直到重新打开文件流，否则可能发生未知错误  
+
+For example|例如  
+```cpp
+#include <bits/stdc++.h> //just for g++
+#include "cfs.h"
+
+int main()
+{
+    cfs::cppfs("test.in","test.out");
+    int n;
+    cfs::cin >> n;
+    cfs::cout << n << std::endl;
+    std::cout << n-1 << std::endl;
+    cfs::closecppfs();
+    return 0;
+}
+```  
+The above code will read the first number `n` from the file `test.in` and output it to `test.out`, while also outputting `n-1` to the terminal console.｜以上代码将会读入文件 `test.in` 中的首个数字 `n` 并输出在 `test.out` 中，同时还会输出 `n-1` 在终端控制台中  
+
+------------
+# Support Us｜支持我们  
+This is Weigao's first project. If there are any shortcomings, bugs, suggestions, or even just small errors in this README (including formatting, spelling, code, etc.), please feel free to submit issues. We will carefully review each one and accept reasonable feedback. If you find this project helpful, please give us a star🌟 – that would be our greatest support and encouragement. Thank you, qaq 🙏|
+这是weigao的首个项目，有不足之处、bug、任何建议甚至只是本readme的小错误（包括格式、拼写、代码等）都可以去提issues，我们将逐条认真观看并接受合理的意见，如果你觉得本项目对你有帮助，请给我们一个star🌟吧，这将是对我们最大的支持与帮助，谢谢qaq🙏
