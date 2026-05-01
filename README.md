@@ -58,7 +58,7 @@ int main()
 ------------
 # Function Introduction｜功能介绍
 
-**0. Get version number｜获取版本号  
+**0. Get version number｜获取版本号**  
 After version `1.1.0`, you can get the version number via the `cfs::getversion()` function. The format is `xx.xx.xx` and it is of type `const char*`.｜在版本 `1.1.0` 之后，你可以通过 `cfs::getversion()` 函数获取版本号，格式为 `xx.xx.xx` 为 `const char*` 类型  
 
 Usage Example｜使用示例  
