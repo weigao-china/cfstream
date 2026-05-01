@@ -1,8 +1,8 @@
 /*
  * @file cfs.h
  * @author weigao (https://github.com/weigao-china)
- * @version 1.0
- * @date 2026-04-27
+ * @version 1.1.0
+ * @date 2026-05-01
  *
  * @copyright 2026 weigao
  * @license MIT
@@ -40,6 +40,11 @@ SOFTWARE.
 namespace cfs {
     static std::ifstream cin;
     static std::ofstream cout;
+    constexpr const char* versionnumber = "1.1.0";
+
+    const char* getversion() {
+        return versionnumber;
+    }
 
     void cfs(const char* input, const char* output) {
         std::freopen(input, "r", stdin);
@@ -47,6 +52,7 @@ namespace cfs {
     }
 
     void cppfs(const char* input, const char* output) {
+        if(cin.is_open()||cout.is_open()) std::cerr << "Error-from-cfs Already open cppfs,please close first!" << std::endl;
         cin.open(input);
         cout.open(output);
     }
