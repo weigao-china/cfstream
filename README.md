@@ -1,4 +1,4 @@
-# cfstream（The latest version is V1.0.0）
+# cfstream（The latest version is V1.1.0）
 This is a C++ header file that provides easy access to file streams and file operations.｜这是一个适用于C++的头文件，可以帮你更简单的的调用文件流与文件操作  
 Currently only supports Windows and C++. Support for Linux，macOS and C may be added in the future.|目前仅支持Windows与C++，后续可能会支持Linux、macOS与C
 
@@ -57,6 +57,24 @@ int main()
 ```
 ------------
 # Function Introduction｜功能介绍
+
+**0. Get version number｜获取版本号  
+After version `1.1.0`, you can get the version number via the `cfs::getversion()` function. The format is `xx.xx.xx` and it is of type `const char*`.｜在版本 `1.1.0` 之后，你可以通过 `cfs::getversion()` 函数获取版本号，格式为 `xx.xx.xx` 为 `const char*` 类型  
+
+Usage Example｜使用示例  
+```cpp
+#include <bits/stdc++.h> //just for g++
+#include "cfs.h"
+
+int main()
+{
+    const char* v = cfs::getversion();
+    std::cout << v << std::endl;
+    return 0;
+}
+```
+This will output the current version number.｜这将输出当前版本号  
+
 **1. C-style file stream｜C式文件流**  
 
 This can easily redirect the input and output streams to file streams, allowing you to directly use `std::cin` and `std::cout`|这可以一键重载输入输出流到文件流，你可以直接使用 `std::cin` 与 `std::cout`  
@@ -89,6 +107,8 @@ This defines dedicated file stream functions `cfs::cin` and `cfs::cout`. You can
 format: `cfs::cppfs(input_filename, output_filename)` ｜格式：`cfs::cppfs(输入文件名,输出文件名)`  
 
 And its paired close function, `cfs::closecppfs()`, can close `cfs::cin` and `cfs::cout`. After closing, you will not be able to use the related operations until you reopen the file stream; otherwise, unknown errors may occur.|以及与其搭配的关闭函数 `cfs::closecppfs()` 可以关闭 `cfs::cin` 与 `cfs::cout` 关闭后，你将无法使用相关操作直到重新打开文件流，否则可能发生未知错误  
+
+In versions above `1.1.0`, we have made security optimizations to the `cfs::cppfs()` function. If you have not closed a previously opened C++-style file stream, an error will be reported with the message: `"Error-from-cfs Already open cppfs,please close first!"`｜在 `1.1.0` 以上版本，我们对 `cfs::cppfs()` 函数进行了安全性优化，如果你之前未关闭打开状态的C++式文件操作流，将会报错，内容为 `“Error-from-cfs Already open cppfs,please close first!”`
 
 For example|例如  
 ```cpp
