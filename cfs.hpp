@@ -1,8 +1,10 @@
 /*
- * @file cfs.h
+ * @repository cfstream
+ * @file cfs.hpp
+ * @language C++
  * @author weigao (https://github.com/weigao-china)
- * @version 1.1.0
- * @date 2026-05-01
+ * @version 1.2.0
+ * @date 2026-05-17
  *
  * @copyright 2026 weigao
  * @license MIT
@@ -30,8 +32,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-#ifndef CFS_H
-#define CFS_H
+#ifndef CFS_H_CPP
+#define CFS_H_CPP
 
 #include <fstream>
 #include <cstdio>
@@ -40,19 +42,31 @@ SOFTWARE.
 namespace cfs {
     static std::ifstream cin;
     static std::ofstream cout;
-    constexpr const char* versionnumber = "1.1.0";
+
+#if __cplusplus >= 201103L
+    constexpr const char* versionnumber = "1.2.0";
+#else
+    const char* versionnumber = "1.2.0";
+#endif
 
     const char* getversion() {
         return versionnumber;
     }
 
     void cfs(const char* input, const char* output) {
-        std::freopen(input, "r", stdin);
-        std::freopen(output, "w", stdout);
+        if (input != NULL) {
+            std::freopen(input, "r", stdin);
+        }
+        if (output != NULL) {
+            std::freopen(output, "w", stdout);
+        }
     }
 
     void cppfs(const char* input, const char* output) {
-        if(cin.is_open()||cout.is_open()) std::cerr << "Error-from-cfs Already open cppfs,please close first!" << std::endl;
+        if(cin.is_open()||cout.is_open()) {
+            std::cerr << "Error-from-cfs Already open cppfs,please close first!" << std::endl;
+            return;
+        }
         cin.open(input);
         cout.open(output);
     }
@@ -68,4 +82,4 @@ namespace cfs {
     }
 }
 
-#endif // CFS_H
+#endif // CFS_H_CPP
