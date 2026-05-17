@@ -1,22 +1,30 @@
-# cfstream（The latest version is V1.1.0）
-This is a C++ header file that provides easy access to file streams and file operations.｜这是一个适用于C++的头文件，可以帮你更简单的的调用文件流与文件操作  
-Currently only supports Windows and C++. Support for Linux，macOS and C may be added in the future.|目前仅支持Windows与C++，后续可能会支持Linux、macOS与C
+# cfstream（The latest version is V1.2.0）We support C now!🎉
+This is a C/C++ header file that provides easy access to file streams and file operations.｜这是一个适用于 C/C++ 的头文件，可以帮你更简单的的调用文件流与文件操作  
+Currently only supports Windows,**And now, in addition to C++, we also support C!** Linux, macOS, and other languages may be supported in the future.|目前仅支持Windows，**现在，除了 C++ 我们也支持 C 了!** 后续可能会支持Linux、macOS 与其他语言
+
+# Language Version Selection Guide｜语言版本选择说明
+1. `cfs.hpp` -> `C++`
+2. `cfs.h` -> `C`
 
 # Usage Tutorial｜使用教程  
 
-You need to first download `cfs.h` from the release and move it to your project path or the compiler's include path.｜你需要先从release中下载cfs.h并将它移动到项目路径或编译器包含路径
+You need to first download `cfstreamVx.x.x.zip` from the release, extract it, select the language version you need, and move it to your project path or compiler path.｜你需要先从 release 中下载 `cfstreamVx.x.x.zip` 并解压，选择你需要的语言版本，并移动到需要的项目路径或编译器路径
 
-You should include the `cfs.h` header file in your code.｜在你的代码中需要包含 `cfs.h` 头文件
+In your code, you need to include the corresponding header file.｜在你的代码中需要包含相应头文件
 
-These are two example｜这是两种包含的例子  
+These are two example(C++)｜这是两种包含的例子（C++）   
+1.`#include "cfs.hpp"` **Recommended**｜**推荐的**  
+2.`#include <cfs.hpp>` **You need to move the header file to the compiler's include path beforehand.**｜**需要提前将头文件移动到编译器包含路经** 
+
+These are two example(C)｜这是两种包含的例子（C）   
 1.`#include "cfs.h"` **Recommended**｜**推荐的**  
 2.`#include <cfs.h>` **You need to move the header file to the compiler's include path beforehand.**｜**需要提前将头文件移动到编译器包含路经**  
 
 **Note: Please do not include this header file multiple times or repeatedly. Even though we have added include guards (macro definitions) to the header file, we cannot guarantee what unknown errors might occur.**｜**注意：请不要多次或重复包含此头文件，即便我们已经对头文件进行了宏定义检测，但无法确定会发生什么未知错误**
 
-All functionality in the header file is defined within the `cfs` namespace.|在头文件中的所有功能都定义在 `cfs` 命名空间内  
-
-When accessing related functions, you need to specify the cfs namespace.｜在访问相关函数等时你需要指定cfs命名空间
+## tips:In `C++` | 提示：在 `C++` 中  
+All functionality in the header file is defined within the `cfs` namespace.|头文件中的所有功能都定义在 `cfs` 命名空间内  
+When accessing related functions, you need to specify the `cfs` namespace.｜在访问相关函数等时你需要指定 `cfs` 命名空间
 
 For example|例如  
 ```cpp
