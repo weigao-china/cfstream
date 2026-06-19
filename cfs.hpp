@@ -3,8 +3,8 @@
  * @file cfs.hpp
  * @language C++
  * @author weigao (https://github.com/weigao-china)
- * @version 1.2.0
- * @date 2026-05-17
+ * @version 1.3.0
+ * @date 2026-06-19
  *
  * @copyright 2026 weigao
  * @license MIT
@@ -39,30 +39,44 @@ SOFTWARE.
 #include <cstdio>
 #include <iostream>
 
+#if __cplusplus >= 201103L
+#define CFS_NULLPTR nullptr
+#else
+#define CFS_NULLPTR NULL
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+#define CFS_STDIN_DEVICE "CON"
+#define CFS_STDOUT_DEVICE "CON"
+#else
+#define CFS_STDIN_DEVICE "/dev/tty"
+#define CFS_STDOUT_DEVICE "/dev/tty"
+#endif
+
 namespace cfs {
     static std::ifstream cin;
     static std::ofstream cout;
 
 #if __cplusplus >= 201103L
-    constexpr const char* versionnumber = "1.2.0";
+    static constexpr const char* versionnumber = "1.3.0";
 #else
-    const char* versionnumber = "1.2.0";
+    static const char* versionnumber = "1.3.0";
 #endif
 
-    const char* getversion() {
+    static inline const char* getversion() {
         return versionnumber;
     }
 
-    void cfs(const char* input, const char* output) {
-        if (input != NULL) {
+    static inline void cfs(const char* input, const char* output) {
+        if (input != CFS_NULLPTR) {
             std::freopen(input, "r", stdin);
         }
-        if (output != NULL) {
+        if (output != CFS_NULLPTR) {
             std::freopen(output, "w", stdout);
         }
     }
 
-    void cppfs(const char* input, const char* output) {
+    static inline void cppfs(const char* input, const char* output) {
         if(cin.is_open()||cout.is_open()) {
             std::cerr << "Error-from-cfs Already open cppfs,please close first!" << std::endl;
             return;
@@ -71,15 +85,19 @@ namespace cfs {
         cout.open(output);
     }
 
-    void closecfs() {
-        std::freopen("CON", "r", stdin);
-        std::freopen("CON", "w", stdout);
+    static inline void closecfs() {
+        std::freopen(CFS_STDIN_DEVICE, "r", stdin);
+        std::freopen(CFS_STDOUT_DEVICE, "w", stdout);
     }
 
-    void closecppfs(){
+    static inline void closecppfs(){
         if (cin.is_open()) cin.close();
         if (cout.is_open()) cout.close();
     }
 }
+
+#undef CFS_NULLPTR
+#undef CFS_STDIN_DEVICE
+#undef CFS_STDOUT_DEVICE
 
 #endif // CFS_H_CPP
