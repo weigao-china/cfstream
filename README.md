@@ -1,195 +1,77 @@
-# cfstream（The latest version is V1.2.0）We support C now!🎉
-This is a C/C++ header file that provides easy access to file streams and file operations.｜这是一个适用于 C/C++ 的头文件，可以帮你更简单的的调用文件流与文件操作  
-Currently only supports Windows,**And now, in addition to C++, we also support C!** Linux, macOS, and other languages may be supported in the future.|目前仅支持Windows，**现在，除了 C++ 我们也支持 C 了!** 后续可能会支持Linux、macOS 与其他语言
+# cfstream
 
-# Language Version Selection Guide｜语言版本选择说明
-1. `cfs.hpp` -> `C++`
-2. `cfs.h` -> `C`
+`cfstream` is a lightweight C/C++ header-only library designed to make file input/output operations and redirection easier.
 
-# Usage Tutorial｜使用教程  
+It is suitable for scenarios where you need to quickly switch between standard I/O and file I/O, such as printing debug information, saving and reading data through files, handling large amounts of input, competitive programming, and local testing.
 
-You need to first download `cfstreamVx.x.x.zip` from the release, extract it, select the language version you need, and move it to your project path or compiler path.｜你需要先从 release 中下载 `cfstreamVx.x.x.zip` 并解压，选择你需要的语言版本，并移动到需要的项目路径或编译器路径
+[中文 README](README.zh-CN.md)
 
-In your code, you need to include the corresponding header file.｜在你的代码中需要包含相应头文件
+## Features
 
-These are two example(C++)｜这是两种包含的例子（C++）   
-1.`#include "cfs.hpp"` **Recommended**｜**推荐的**  
-2.`#include <cfs.hpp>` **You need to move the header file to the compiler's include path beforehand.**｜**需要提前将头文件移动到编译器包含路经** 
+- Header-only, no extra source files required
+- Supports both C and C++
+- Cross-platform support for Windows, macOS, and Linux
+- Redirects input and output with a single function call
+- Provides independent `cfs::cin` and `cfs::cout` in the C++ version
+- Provides namespace encapsulation in the C++ version for safer usage
 
-These are two example(C)｜这是两种包含的例子（C）   
-1.`#include "cfs.h"` **Recommended**｜**推荐的**  
-2.`#include <cfs.h>` **You need to move the header file to the compiler's include path beforehand.**｜**需要提前将头文件移动到编译器包含路经**  
+## File Selection
 
-**Note: Please do not include this header file multiple times or repeatedly. Even though we have added include guards (macro definitions) to the header file, we cannot guarantee what unknown errors might occur.**｜**注意：请不要多次或重复包含此头文件，即便我们已经对头文件进行了宏定义检测，但无法确定会发生什么未知错误**
+| File | Language |
+|---|---|
+| `cfs.hpp` | C++ |
+| `cfs.h` | C |
 
-## tips:In `C++` | 提示：在 `C++` 中  
-All functionality in the header file is defined within the `cfs` namespace.|头文件中的所有功能都定义在 `cfs` 命名空间内  
-When accessing related functions, you need to specify the `cfs` namespace.｜在访问相关函数等时你需要指定 `cfs` 命名空间
+## Quick Start
 
-For example|例如  
+### C++
+
 ```cpp
-#include <bits/stdc++.h> //just for g++
-#include "cfs.h"
+#include "cfs.hpp"
 
-int main()
-{
-    cfs::cppfs("test.in","test.out");
+int main() {
+    cfs::cppfs("test.in", "test.out");
+
     int n;
     cfs::cin >> n;
-    cfs::cout << n << std::endl;
+    cfs::cout << n << '\n';
+
     cfs::closecppfs();
     return 0;
 }
 ```
-You can import the relevant functions using the `using` keyword.(Please first ensure that your project does not need to use stdio.)｜你可以通过 `using` 关键字导入相关函数（请先确保你的项目不需要使用stdio）  
 
-For example|例如  
-```cpp
-#include <bits/stdc++.h> //just for g++
-#include "cfs.h"
-using cfs::cppfs;
-using cfs::closecppfs;
-using std::endl;
-using cfs::cin;
-using cfs::cout;
+### C
 
-int main()
-{
-    cppfs("test.in","test.out");
-    int n;
-    cin >> n;
-    cout << n << endl;
-    closecppfs();
-    return 0;
-}
-```
-------------
-# Function Introduction｜功能介绍
-
-## C++
-
-After version `1.2.0`, supports `C++98` and above; previously supported `C++11` and above. | `1.2.0` 版本后支持 `C++98` 以上标准，之前的支持 `C++11` 以上标准
-
-**0. Get version number｜获取版本号**  
-After version `1.1.0`, you can get the version number via the `cfs::getversion()` function. The format is `xx.xx.xx` and it is of type `const char*`.｜在版本 `1.1.0` 之后，你可以通过 `cfs::getversion()` 函数获取版本号，格式为 `xx.xx.xx` 为 `const char*` 类型  
-
-Usage Example｜使用示例  
-```cpp
-#include <bits/stdc++.h> //just for g++
-#include "cfs.h"
-
-int main()
-{
-    const char* v = cfs::getversion();
-    std::cout << v << std::endl;
-    return 0;
-}
-```
-This will output the current version number.｜这将输出当前版本号  
-
-**1. C-style file stream｜C式文件流**  
-
-This can redirect input and output streams to file streams with a single line of code. You can directly use `std::cin` and `std::cout`, as well as C-style `std::printf` and `std::scanf`, and even C++23's `std::print` and `std::println`.|这可以一键重载输入输出流到文件流，你可以直接使用 `std::cin` 与 `std::cout` 也包括C式的 `std::printf` 与  `std::scanf` , 甚至 `C++23` 的 `std::print` 与 `std::println`  
-
-format: `cfs::cfs(input_filename, output_filename)` ｜格式：`cfs::cfs(输入文件名,输出文件名)`  
-In versions above `1.2.0`, both the `input_filename` and `output_filename` parameters can be `NULL`, which allows the corresponding stream not to be redirected. You can also set both parameters to `NULL` – though of course, that would be pointless 😅 ｜ 在 `1.2.0` 以上版本中 参数 `输入文件名` 和 `输出文件名` 均可以为 `NULL` 这可以让对应的流不被重载，同时你也可以让两个参数都为 `NULL` 当然，这是毫无意义的😅  
-
-And its paired close function, `cfs::closecfs()`, can redirect the input and output streams back to the console.|以及与其搭配的关闭函数 `cfs::closecfs()` 可以重新将输入输出流定向回控制台  
- 
-For example|例如  
-```cpp
-#include <bits/stdc++.h> //just for g++
-#include "cfs.h"
-
-int main()
-{
-    cfs::cfs(NULL,"test.out");
-    int n;
-    std::cin >> n;
-    std::cout << n << std::endl;
-    cfs::closecfs();
-    return 0;
-}
-```  
-The above code will read a number from the terminal console and output it to `test.out`.｜以上代码将会从终端控制台读取一个数字并输出在 `test.out` 中  
-
-**2. C++-style file stream｜C++式文件流**  
-
-This defines dedicated file stream functions `cfs::cin` and `cfs::cout`. You can use `cfs::cin` and `cfs::cout` for file stream input/output while retaining `std::cin` and `std::cout` for standard input/output.|这定义了专门的文件流函数 `cfs::cin` 与 `cfs::cout` 你可以使用 `cfs::cin` 与 `cfs::cout` 实现文件流输入输出，并保留 `std::cin` 与 `std::cout` 进行标准输入输出  
-
-format: `cfs::cppfs(input_filename, output_filename)` ｜格式：`cfs::cppfs(输入文件名,输出文件名)`  
-
-And its paired close function, `cfs::closecppfs()`, can close `cfs::cin` and `cfs::cout`. After closing, you will not be able to use the related operations until you reopen the file stream; otherwise, unknown errors may occur.|以及与其搭配的关闭函数 `cfs::closecppfs()` 可以关闭 `cfs::cin` 与 `cfs::cout` 关闭后，你将无法使用相关操作直到重新打开文件流，否则可能发生未知错误  
-
-In versions above `1.1.0`, we have made security optimizations to the `cfs::cppfs()` function. If you have not closed a previously opened C++-style file stream, an error will be reported with the message: `"Error-from-cfs Already open cppfs,please close first!"`｜在 `1.1.0` 以上版本，我们对 `cfs::cppfs()` 函数进行了安全性优化，如果你之前未关闭打开状态的C++式文件操作流，将会报错，内容为 `“Error-from-cfs Already open cppfs,please close first!”`  
-In version `1.2.0`, we have once again made security improvements to ensure everything is foolproof. ｜ 而在 `1.2.0` 版本中，我们再次进行了安全性改进，确保万无一失  
-
-For example|例如  
-```cpp
-#include <bits/stdc++.h> //just for g++
-#include "cfs.h"
-
-int main()
-{
-    cfs::cppfs("test.in","test.out");
-    int n;
-    cfs::cin >> n;
-    cfs::cout << n << std::endl;
-    std::cout << n-1 << std::endl;
-    cfs::closecppfs();
-    return 0;
-}
-```  
-The above code will read the first number `n` from the file `test.in` and output it to `test.out`, while also outputting `n-1` to the terminal console.｜以上代码将会读入文件 `test.in` 中的首个数字 `n` 并输出在 `test.out` 中，同时还会输出 `n-1` 在终端控制台中  
-
-## C (After version 1.2.0）
-
-Supports `C89` and above standards. | 支持 `C89‌` 以上标准
-
-**0. Get version number｜获取版本号**  
-You can get the version number via the `cfs_getversion()` function. The format is `xx.xx.xx` and it is of type `const char*`.｜你可以通过 `cfs_getversion()` 函数获取版本号，格式为 `xx.xx.xx` 为 `const char*` 类型  
-
-Usage Example｜使用示例  
 ```c
-#include <stdio.h>
 #include "cfs.h"
 
-int main(void)
-{
-    const char* v = cfs_getversion();
-    printf("%s\n", v);
-    return 0;
-}
-```
-This will output the current version number.｜这将输出当前版本号  
+int main(void) {
+    cfs("test.in", "test.out");
 
-**1. C-style file stream｜C式文件流**  
-
-This can redirect input and output streams to file streams with a single line of code. You can directly use  `printf` and `scanf`.|这可以一键重载输入输出流到文件流，你可以直接使用 `printf` 与  `scanf` `  
-
-format: `cfs(input_filename, output_filename)` ｜格式：`cfs(输入文件名,输出文件名)`  
-Both the `input_filename` and `output_filename` parameters can be `NULL`, which allows the corresponding stream not to be redirected. You can also set both parameters to `NULL` – though of course, that would be pointless 😅 ｜ 参数 `输入文件名` 和 `输出文件名` 均可以为 `NULL` 这可以让对应的流不被重载，同时你也可以让两个参数都为 `NULL` 当然，这是毫无意义的😅  
-
-And its paired close function, `closecfs()`, can redirect the input and output streams back to the console.|以及与其搭配的关闭函数 `closecfs()` 可以重新将输入输出流定向回控制台  
- 
-For example|例如  
-```c
-#include <stdio.h>
-#include "cfs.h"
-
-int main(void)
-{
-    cfs(NULL,"test.out");
     int n;
-    scanf("%d",&n);
-    printf("%d/n",n):
+    scanf("%d", &n);
+    printf("%d\n", n);
+
     closecfs();
     return 0;
 }
-```  
-The above code will read a number from the terminal console and output it to `test.out`.｜以上代码将会从终端控制台读取一个数字并输出在 `test.out` 中  
+```
 
-------------
-# Support Us｜支持我们  
-This is Weigao's first project. If there are any shortcomings, bugs, suggestions, or even just small errors in this README (including formatting, spelling, code, etc.), please feel free to submit issues. We will carefully review each one and accept reasonable feedback. If you find this project helpful, please give us a star🌟 – that would be our greatest support and encouragement. Thank you, qaq 🙏|
-这是weigao的首个项目，有不足之处、bug、任何建议甚至只是本readme的小错误（包括格式、拼写、代码等）都可以去提issues，我们将逐条认真观看并接受合理的意见，如果你觉得本项目对你有帮助，请给我们一个star🌟吧，这将是对我们最大的支持与帮助，谢谢qaq🙏
+## Documentation
+
+This README only provides a brief project overview and a quick start guide. **For detailed usage, examples, and release notes, please check the project Wiki.**
+
+## License
+
+This project is licensed under the MIT License. Individuals and teams may use, modify, and distribute this project, but the original copyright notice **must be preserved**.
+
+## Support ~~Us~~ Me
+
+weigao is only a junior high school student, and this is also weigao's first project. If you find any shortcomings, bugs, suggestions, or even small mistakes in the README or Wiki, including formatting, spelling, or code issues, feel free to open an issue.
+
+We, well, actually just me, will carefully read each issue and accept reasonable feedback.
+
+If this project helps you, please give it a star 🌟. That would be the greatest support and encouragement for this project.
+
+Thank you, QaQ 🙏
