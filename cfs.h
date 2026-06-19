@@ -3,8 +3,8 @@
  * @file cfs.h
  * @language C
  * @author weigao (https://github.com/weigao-china)
- * @version 1.2.0
- * @date 2026-05-17
+ * @version 1.3.0
+ * @date 2026-06-19
  *
  * @copyright 2026 weigao
  * @license MIT
@@ -35,19 +35,31 @@ SOFTWARE.
 #ifndef CFS_H_C
 #define CFS_H_C
 
+#if !defined(__cplusplus) && (!defined(__STDC_VERSION__) || __STDC_VERSION__ < 199901L)
+#error "cfs.h requires C99 or later."
+#endif
+
 #include <stdio.h>
+
+#if defined(_WIN32) || defined(_WIN64)
+#define CFS_STDIN_DEVICE "CON"
+#define CFS_STDOUT_DEVICE "CON"
+#else
+#define CFS_STDIN_DEVICE "/dev/tty"
+#define CFS_STDOUT_DEVICE "/dev/tty"
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-static const char* versionnumber = "1.2.0";
+static const char* versionnumber = "1.3.0";
 
-static const char* cfs_getversion(void) {
+static inline const char* cfs_getversion(void) {
     return versionnumber;
 }
 
-static void cfs(const char* input, const char* output) {
+static inline void cfs(const char* input, const char* output) {
     if (input != NULL) {
         freopen(input, "r", stdin);
     }
@@ -56,13 +68,16 @@ static void cfs(const char* input, const char* output) {
     }
 }
 
-static void closecfs(void) {
-    freopen("CON", "r", stdin);
-    freopen("CON", "w", stdout);
+static inline void closecfs(void) {
+    freopen(CFS_STDIN_DEVICE, "r", stdin);
+    freopen(CFS_STDOUT_DEVICE, "w", stdout);
 }
 
 #ifdef __cplusplus
 }
 #endif
+
+#undef CFS_STDIN_DEVICE
+#undef CFS_STDOUT_DEVICE
 
 #endif /* CFS_H_C */
