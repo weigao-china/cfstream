@@ -2,7 +2,7 @@
 
 `cfstream` is a lightweight C/C++ header-only library designed to make file input/output operations and redirection easier.
 
-It is suitable for scenarios where you need to quickly switch between standard I/O and file I/O, such as printing debug information, saving and reading data through files, handling large amounts of input, competitive programming, and local testing.
+It is suitable for scenarios where you need to quickly switch between standard I/O and file I/O, such as printing debug information, saving and reading data through files, handling large amounts of input, Informatics Olympiad (OI), and local testing.
 
 [中文 README](README.zh-CN.md)
 
