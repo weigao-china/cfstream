@@ -1,2 +1,4 @@
 *.hpp linguist-language=C++
 **.h linguist-language=C
+*.md linguist-detectable=true
+*.md linguist-documentation=false
