@@ -60,7 +60,7 @@ int main(void) {
 
 ## 文档
 
-本 README 只提供项目概览和快速开始。**详细用法、示例和版本更新记录请查看项目 Wiki。**
+本 README 只提供项目概览和快速开始。**详细用法、示例和版本更新记录请查看项目 [Wiki](https://github.com/weigao-china/cfstream/wiki)。**
 
 ## 开源协议
 
