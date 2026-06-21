@@ -60,7 +60,7 @@ int main(void) {
 
 ## Documentation
 
-This README only provides a brief project overview and a quick start guide. **For detailed usage, examples, and release notes, please check the project Wiki.**
+This README only provides a brief project overview and a quick start guide. **For detailed usage, examples, and release notes, please check the project [Wiki](https://github.com/weigao-china/cfstream/wiki).**
 
 ## License
 
