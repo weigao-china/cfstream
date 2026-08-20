@@ -3,8 +3,8 @@
  * @file cfs.h
  * @language C
  * @author weigao (https://github.com/weigao-china)
- * @version 1.3.0
- * @date 2026-06-19
+ * @version 1.4.0
+ * @date 2026-7-24
  *
  * @copyright 2026 weigao
  * @license MIT
@@ -53,7 +53,7 @@ SOFTWARE.
 extern "C" {
 #endif
 
-static const char* versionnumber = "1.3.0";
+static const char* versionnumber = "1.4.0";
 
 static inline const char* cfs_getversion(void) {
     return versionnumber;
@@ -61,16 +61,29 @@ static inline const char* cfs_getversion(void) {
 
 static inline void cfs(const char* input, const char* output) {
     if (input != NULL) {
-        freopen(input, "r", stdin);
+        fflush(stdin);
+        if (freopen(input, "r", stdin) == NULL) {
+            fprintf(stderr, "Error-from-cfs Failed to open input file: %s\n", input);
+        }
     }
     if (output != NULL) {
-        freopen(output, "w", stdout);
+        fflush(stdout);
+        if (freopen(output, "w", stdout) == NULL) {
+            fprintf(stderr, "Error-from-cfs Failed to open output file: %s\n", output);
+        }
     }
 }
 
 static inline void closecfs(void) {
-    freopen(CFS_STDIN_DEVICE, "r", stdin);
-    freopen(CFS_STDOUT_DEVICE, "w", stdout);
+    fflush(stdin);
+    fflush(stdout);
+
+    if (freopen(CFS_STDIN_DEVICE, "r", stdin) == NULL) {
+        fprintf(stderr, "Error-from-cfs Failed to restore stdin\n");
+    }
+    if (freopen(CFS_STDOUT_DEVICE, "w", stdout) == NULL) {
+        fprintf(stderr, "Error-from-cfs Failed to restore stdout\n");
+    }
 }
 
 #ifdef __cplusplus
