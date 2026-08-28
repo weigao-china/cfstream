@@ -34,12 +34,12 @@ git push origin feat/your-feature-name
 
 ### 🐛 Reporting Issues
 
-* Search existing [Issues](https://www.google.com/search?q=https://github.com/weigao-china/cfstream/issues) before opening a new one.
+* Search existing [Issues](https://github.com/weigao-china/cfstream/issues) before opening a new one.
 * Provide clear context and reproduction steps when submitting an issue.
 
 ### 📜 Code of Conduct
 
-Please follow our [Code of Conduct](https://www.google.com/search?q=CODE_OF_CONDUCT.md) to keep the community respectful and welcoming.
+Please follow our [Code of Conduct](CODE_OF_CONDUCT.md) to keep the community respectful and welcoming.
 
 ---
 
