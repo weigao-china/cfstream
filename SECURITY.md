@@ -20,9 +20,9 @@ Please refer to the table below for the supported versions of **cfstream**. We r
 
 ### Reporting a Vulnerability
 
-If you discover a security vulnerability within **cfstream**, please **DO NOT** create a public GitHub Issue. 
+If you discover a security vulnerability within **cfstream**, You **CAN** create a public GitHub Issue. 
 
-Instead, please send an email directly to the maintainer at: **3595864179@qq.com**. 
+Or, send an email directly to the maintainer at: **3595864179@qq.com**. 
 
 *   **Response Time:** You can expect an initial response within 48 hours.
 *   **Updates:** We will keep you updated on the progress of investigating and fixing the vulnerability.
@@ -46,9 +46,9 @@ Instead, please send an email directly to the maintainer at: **3595864179@qq.com
 
 ### 报告安全漏洞
 
-如果在 **cfstream** 中发现了安全漏洞，请 **不要** 提交公开的 GitHub Issue。
+如果在 **cfstream** 中发现了安全漏洞，你 **可以** 提交公开的 GitHub Issue。
 
-请直接发送邮件至项目维护者：**3595864179@qq.com**。
+或直接发送邮件至项目维护者：**3595864179@qq.com**。
 
 *   **响应时间：** 我们会在收到邮件后的 48 小时内给出初步回复。
 *   **进度同步：** 我们会及时向您跟进漏洞排查与修复的进展。
