@@ -75,11 +75,9 @@ git push origin feat/你的功能名称
 
 ### 🐛 反馈问题 (Issues)
 
-* 提交前请先搜索已有的 [Issues](https://www.google.com/search?q=https://github.com/weigao-china/cfstream/issues)。
+* 提交前请先搜索已有的 [Issues](https://github.com/weigao-china/cfstream/issues)。
 * 创建新 Issue 时，请提供清晰的背景描述与复现步骤。
 
 ### 📜 行为准则
 
-请遵守本项目的 [行为准则](https://www.google.com/search?q=CODE_OF_CONDUCT.md)，共同维护友好、包容的社区环境。
-
-```
+请遵守本项目的 [行为准则](CODE_OF_CONDUCT.md)，共同维护友好、包容的社区环境。
